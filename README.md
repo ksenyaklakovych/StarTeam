@@ -6,6 +6,8 @@
 - Andrii Plekan
 - Yaryna Paslavska
 ## Description
+[Functional Specification](./blob/main/docs/Functional%20specification.pdf)
+
 ## Architecture
 ## Storage
 ## Resiliency Model
