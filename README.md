@@ -9,6 +9,8 @@
 [Functional Specification](./docs/Functional%20specification.pdf)
 
 [Architecture](./docs/Architecture.pdf)
+
+[UML Diagram](./docs/SequenceDiagram.pdf)
 ## Storage
 ## Resiliency Model
 ## Security Model
