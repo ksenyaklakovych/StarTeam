@@ -6,7 +6,7 @@
 - Andrii Plekan
 - Yaryna Paslavska
 ## Description
-[Functional Specification](./blob/main/docs/Functional%20specification.pdf)
+[Functional Specification](./docs/Functional%20specification.pdf)
 
 ## Architecture
 ## Storage
