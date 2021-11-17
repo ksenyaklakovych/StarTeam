@@ -14,4 +14,8 @@
     <Folder Include="AggregatesModel\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StarForum.Common\StarForum.Common.csproj" />
+  </ItemGroup>
+
 </Project>
