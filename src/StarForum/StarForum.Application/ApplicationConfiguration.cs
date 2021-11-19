@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StarForum.Application.Behaviours;
 
 namespace StarForum.Application
 {
@@ -8,7 +10,12 @@ namespace StarForum.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMediatR(typeof(ApplicationConfiguration).Assembly);
+            var currentAssembly = typeof(ApplicationConfiguration).Assembly;
+
+            services.AddMediatR(currentAssembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehaviour<,>));
+
+            services.AddFluentValidation(config => config.RegisterValidatorsFromAssembly(currentAssembly));
 
             return services;
         }

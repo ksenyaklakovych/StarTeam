@@ -21,4 +21,8 @@
     <ProjectReference Include="..\StarForum.Infrastructure\StarForum.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
