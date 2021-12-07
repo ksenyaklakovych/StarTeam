@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarForum.Application\StarForum.Application.csproj" />
-    <ProjectReference Include="..\StarForum.Common\StarForum.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
