@@ -16,12 +16,12 @@ namespace StarForum.Infrastructure
             _mediator = mediator;
         }
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<bool> SaveEntitiesAsnyc(CancellationToken cancellationToken = default)
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken)
         {
             await _mediator.DispatchDomainEventsAsync(_dbContext);
 
