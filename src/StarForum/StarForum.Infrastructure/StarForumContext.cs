@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StarForum.Domain.Abstract;
+using StarForum.Domain.AggregatesModel.AnswerAggregate;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
 using StarForum.Infrastructure.EntityConfigurations;
 
@@ -10,6 +11,7 @@ namespace StarForum.Infrastructure
     public class StarForumContext: DbContext, IUnitOfWork
     {
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         public StarForumContext(DbContextOptions<StarForumContext> options) : base(options)
         {
@@ -26,7 +28,9 @@ namespace StarForum.Infrastructure
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            await base.SaveChangesAsync(cancellationToken);
+
+            return true;
         }
     }
 }
