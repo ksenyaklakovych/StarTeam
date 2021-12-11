@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarForum.Infrastructure;
 
 namespace StarForum.Infrastructure.Migrations
 {
     [DbContext(typeof(StarForumContext))]
-    partial class StarForumContextModelSnapshot : ModelSnapshot
+    [Migration("20211211182152_Add-Answer-User-UserLogins-tables")]
+    partial class AddAnswerUserUserLoginstables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,8 +41,8 @@ namespace StarForum.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "answerseq")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -48,17 +50,26 @@ namespace StarForum.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
+                    b.Property<string>("QuestionId")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("QuestionId1");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("_questionId")
+                        .HasColumnType("int")
+                        .HasColumnName("QuestionId");
+
+                    b.Property<int?>("_userId")
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("_questionId");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("_userId");
 
                     b.ToTable("Answers");
                 });
@@ -71,8 +82,9 @@ namespace StarForum.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "questionseq")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("AuthorId1");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -83,9 +95,13 @@ namespace StarForum.Infrastructure.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("_authorId")
+                        .HasColumnType("int")
+                        .HasColumnName("AuthorId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("_authorId");
 
                     b.ToTable("Questions");
                 });
@@ -145,26 +161,23 @@ namespace StarForum.Infrastructure.Migrations
 
             modelBuilder.Entity("StarForum.Domain.AggregatesModel.AnswerAggregate.Answer", b =>
                 {
-                    b.HasOne("StarForum.Domain.AggregatesModel.UserAggregate.User", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", null)
                         .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("_questionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("StarForum.Domain.AggregatesModel.UserAggregate.User", null)
+                        .WithMany()
+                        .HasForeignKey("_userId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", b =>
                 {
                     b.HasOne("StarForum.Domain.AggregatesModel.UserAggregate.User", null)
                         .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("_authorId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

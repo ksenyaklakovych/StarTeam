@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarForum.Infrastructure;
 
 namespace StarForum.Infrastructure.Migrations
 {
     [DbContext(typeof(StarForumContext))]
-    partial class StarForumContextModelSnapshot : ModelSnapshot
+    [Migration("20211211183557_UpdateQuestionTable")]
+    partial class UpdateQuestionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,26 +41,28 @@ namespace StarForum.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "answerseq")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("_authorId")
+                        .HasColumnType("int")
+                        .HasColumnName("AuthorId");
+
+                    b.Property<int?>("_questionId")
+                        .HasColumnType("int")
+                        .HasColumnName("QuestionId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("_authorId");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("_questionId");
 
                     b.ToTable("Answers");
                 });
@@ -147,15 +151,13 @@ namespace StarForum.Infrastructure.Migrations
                 {
                     b.HasOne("StarForum.Domain.AggregatesModel.UserAggregate.User", null)
                         .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("_authorId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", null)
                         .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("_questionId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", b =>
