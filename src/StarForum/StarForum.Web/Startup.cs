@@ -26,6 +26,7 @@ namespace StarForum.Web
             services.AddApplicationServices(_configuration)
                 .AddInfrastructureServices(_configuration)
                 .AddRouting();
+            services.AddApplicationInsightsTelemetry();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
