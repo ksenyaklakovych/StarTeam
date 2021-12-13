@@ -1,4 +1,5 @@
 ﻿using StarForum.Domain.Abstract;
+using StarForum.Domain.AggregatesModel.UserAggregate;
 
 namespace StarForum.Domain.AggregatesModel.UserLoginsAggregate
 {
@@ -7,5 +8,7 @@ namespace StarForum.Domain.AggregatesModel.UserLoginsAggregate
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
         public string ProviderName { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

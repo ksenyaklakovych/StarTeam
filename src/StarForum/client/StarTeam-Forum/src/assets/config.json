@@ -1,0 +1,4 @@
+{
+    "externalLoginUrl": "api/auth/externalLogin",
+    "externalSignOutUrl": ""
+}

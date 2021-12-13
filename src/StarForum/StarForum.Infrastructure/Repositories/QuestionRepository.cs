@@ -27,7 +27,6 @@ namespace StarForum.Infrastructure.Repositories
         public Question Add(Question question)
         {
             return _context.Questions.Add(question).Entity;
-
         }
 
         public async Task<Question> GetAsync(int questionId)
