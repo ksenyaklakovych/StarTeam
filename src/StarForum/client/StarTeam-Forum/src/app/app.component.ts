@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
         },
         error(msg) {
           that.errorMsg = msg;
-          that.authService.signOutExternal();
+          //that.authService.signOutExternal();
         }
       });
   }

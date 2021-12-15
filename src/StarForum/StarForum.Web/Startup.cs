@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using StarForum.Application;
 using StarForum.Infrastructure;
 using Autofac;
+using Microsoft.OpenApi.Models;
 
 namespace StarForum.Web
 {
@@ -27,6 +28,18 @@ namespace StarForum.Web
                 .AddInfrastructureServices(_configuration)
                 .AddRouting();
             services.AddApplicationInsightsTelemetry();
+
+            services.AddCors(o => o.AddPolicy("Default", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GS.WebApi", Version = "v1" });
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -45,6 +58,8 @@ namespace StarForum.Web
 
             app.UseRouting();
 
+            app.UseCors("Default");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
@@ -52,6 +67,9 @@ namespace StarForum.Web
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GS.WebApi v1"));
         }
     }
 }

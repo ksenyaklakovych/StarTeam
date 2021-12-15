@@ -8,7 +8,7 @@ import { GoogleAuthDto } from '../types/authentication/GoogleAuthDto';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: 'my-auth-token',
+   // Authorization: 'my-auth-token',
   }),
 };
 
@@ -40,8 +40,9 @@ export class AuthApiService {
   }
 
   externalLogin(loginModel: GoogleAuthDto): Observable<any> {
+    console.log(loginModel);
     return this.http
-      .post<any>(this.config.externalLoginUrl, loginModel, httpOptions)
+      .post<any>(`${this.config.baseURL}${this.config.externalLoginUrl}`, loginModel, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

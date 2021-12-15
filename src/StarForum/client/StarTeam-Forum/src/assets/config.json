@@ -1,4 +1,5 @@
 {
-    "externalLoginUrl": "api/auth/externalLogin",
-    "externalSignOutUrl": ""
+    "baseURL":"https://localhost:44395/",
+    "externalLoginUrl": "api/Auth/ExternalLogin",
+    "externalSignOutUrl": ""    
 }
