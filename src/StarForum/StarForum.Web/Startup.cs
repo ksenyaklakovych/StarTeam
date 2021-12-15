@@ -3,13 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using StarForum.Application;
 using StarForum.Infrastructure;
+using Autofac;
 
 namespace StarForum.Web
 {
@@ -31,7 +28,15 @@ namespace StarForum.Web
             services.AddHttpClient();
 
             services.AddApplicationServices(_configuration)
-                .AddInfrastructureServices(_configuration);
+                .AddInfrastructureServices(_configuration)
+                .AddRouting();
+            services.AddApplicationInsightsTelemetry();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            var connectionString = _configuration["ConnectionString"];
+            InfrastructureConfiguration.Register(connectionString, builder);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,8 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AggregatesModel\FavouriteAggregate\" />
+    <Folder Include="AggregatesModel\ComplaintAggregate\" />
+    <Folder Include="AggregatesModel\MarkAggregate\" />
     <Folder Include="Events\" />
-    <Folder Include="AggregatesModel\" />
   </ItemGroup>
 
   <ItemGroup>

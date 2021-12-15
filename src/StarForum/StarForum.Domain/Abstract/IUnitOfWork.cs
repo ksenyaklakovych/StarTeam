@@ -5,7 +5,7 @@ namespace StarForum.Domain.Abstract
 {
     public interface IUnitOfWork
     {
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-        Task<bool> SaveEntitiesAsnyc(CancellationToken cancellationToken = default);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken);
     }
 }

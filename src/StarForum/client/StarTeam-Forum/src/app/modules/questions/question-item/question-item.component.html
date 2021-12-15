@@ -1,0 +1,16 @@
+<div class="card" *ngIf="question">
+    <div class="card-header d-flex justify-content-between">
+        <p class="bold title">{{question.title}}</p>
+        <p>{{question.createdDate | date: 'fullDate'}}</p>
+    </div>
+    <div class="card-body">
+        <p>{{question.description}}</p>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-between">
+        <p>
+            <i class="bi bi-pencil-square"></i>
+            {{question.authorName}}
+        </p>
+        <button class="btn btn-primary reply-btn">Reply</button>
+    </div>
+</div>
