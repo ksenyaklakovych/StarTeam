@@ -1,5 +1,45 @@
-<div class="d-flex flex-column">
-    <div *ngFor="let question of questions">
-        <question-item [question]="question"></question-item>
+<div class="d-flex flex-direction-column">
+    <div class="left-tab">
+        <div class="button-area d-flex">
+            <button class="btn btn-primary"><i class="bi bi-plus"></i> ASK A QUESTION</button>
+        </div>
+        <hr />
+        <div class="sections-area">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-question-circle-fill"></i>
+                Questions
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-tags-fill"></i>
+                Tags
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-list-stars"></i>
+                Favourites
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-people-fill"></i>
+                Users
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column col-md-7 questions-area">
+        <h1>All Questions</h1>
+        <div class="filter">
+            <div class="dropdown">
+                Order by
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Date
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Title</a>
+                    <a class="dropdown-item" href="#">Date</a>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let question of questions">
+            <question-item [question]="question"></question-item>
+        </div>
     </div>
 </div>

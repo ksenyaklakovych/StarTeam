@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsModule } from './modules/questions/questions.module';
+import { HttpClientModule }   from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { QuestionsModule } from './modules/questions/questions.module';
     AppRoutingModule,
     AuthorizationModule,
     QuestionsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
