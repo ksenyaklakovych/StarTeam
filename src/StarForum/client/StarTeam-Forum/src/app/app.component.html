@@ -1,5 +1,14 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav">
+    <a class="nav-item nav-link d-flex" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <img class="logo" src="../assets/chat-logo.png" />StarForum</a>
+    <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Profile</a>
+  </div>
+</nav>
 <button (click)="authenticate()">
   Log in
 </button>
 
-<router-outlet></router-outlet>
+<div class="app-container col-md-6 offset-md-3 mt-5">
+  <router-outlet></router-outlet>
+</div>

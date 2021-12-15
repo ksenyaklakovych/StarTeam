@@ -1,0 +1,34 @@
+.card {
+    min-height: 150px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .card-header {
+        height: 50px;
+        align-items: baseline;
+
+        .title {
+            font-size: 20px;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #707070;
+        }
+    }
+
+    .card-footer {
+        align-items: center;
+        p {
+            margin-bottom: 0;
+            font-size: 14spx;
+        }
+        .reply-btn { 
+            height: 30px;
+            padding-top: 2px;
+            font-weight: 600;
+            background-color: #25b7d3;
+            border-color: #25b7d3;
+        }
+    }
+}

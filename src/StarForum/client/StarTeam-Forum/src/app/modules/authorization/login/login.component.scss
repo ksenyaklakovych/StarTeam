@@ -1,0 +1,21 @@
+.login {
+  flex-direction: column;
+  
+  .sign-in {
+    background-color: white;
+    border-color: hsl(210, 14%, 89%);
+    box-shadow: 0px 1px #dee2e6;
+    color: black;
+    font-size: 23px;
+
+    .google-login-btn {
+      width: 25px;
+      margin-right: 10px;
+    }
+  }
+
+  .chat-logo {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+}
