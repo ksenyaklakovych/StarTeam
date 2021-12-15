@@ -63,7 +63,7 @@ namespace StarForum.Web.Controllers
 
 			//check for the Locked out account
 
-			var token = await _jwtHandler.GenerateToken(user);
+			var token = _jwtHandler.GenerateToken(user);
 			return Ok(new AuthResponseModel { Token = token, IsAuthSuccessful = true });
 		}
 	}

@@ -4,6 +4,8 @@ using StarForum.Application.Commands;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
 using StarForum.Domain.AggregatesModel.AnswerAggregate;
 using StarForum.Infrastructure.Repositories;
+using StarForum.Domain.AggregatesModel.UserLoginsAggregate;
+using StarForum.Domain.AggregatesModel.UserAggregate;
 
 namespace StarForum.Domain.AutofacModules
 {
@@ -27,6 +29,14 @@ namespace StarForum.Domain.AutofacModules
 
             builder.RegisterType<AnswerRepository>()
                 .As<IAnswerRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserLoginRepository>()
+                .As<IUserLoginRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserRepository>()
+                .As<IUserRepository>()
                 .InstancePerLifetimeScope();
 
             //builder.RegisterType<RequestManager>()

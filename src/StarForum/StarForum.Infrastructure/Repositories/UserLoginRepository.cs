@@ -29,15 +29,17 @@ namespace StarForum.Infrastructure.Repositories
 
         public async Task<UserLogin> AddAsync(UserLogin userLogin)
         {
-            return (await _context.UserLogins.AddAsync(userLogin)).Entity;
+            var responce = await _context.UserLogins.AddAsync(userLogin);
+            await _context.SaveChangesAsync();
+            return responce.Entity;
         }
 
         public async Task<User> FindByLoginAsync(string provider, string providerKey)
         {
-            return (await _context
-                                .UserLogins
+            return (await _context.UserLogins
+                                .Include(ul => ul.User)
                                 .FirstOrDefaultAsync(o => o.LoginProvider == provider && o.ProviderKey == providerKey))
-                                .User;
+                                ?.User;
         }
     }
 }

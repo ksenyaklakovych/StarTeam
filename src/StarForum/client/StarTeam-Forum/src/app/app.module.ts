@@ -7,21 +7,20 @@ import { AppComponent } from './app.component';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsModule } from './modules/questions/questions.module';
-import { AuthApiService, ConfigService } from './services/auth.service';
+import { AuthApiService } from './services/auth.service';
+import { ConfigService } from './services/config.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthorizationModule,
     QuestionsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthApiService, ConfigService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

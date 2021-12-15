@@ -1,36 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Config } from '../types/Config';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { GoogleAuthDto } from '../types/authentication/GoogleAuthDto';
+import { ConfigService } from './config.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-   // Authorization: 'my-auth-token',
+    Authorization: `Bearer ${window.localStorage.getItem('token')}`,
   }),
 };
 
 @Injectable()
-export class ConfigService {
-  constructor(private http: HttpClient) {}
-
-  configUrl = 'assets/config.json';
-
-  getConfig() {
-    return this.http.get<Config>(this.configUrl);
-  }
-}
-
-@Injectable()
 export class AuthApiService {
   config!: Config;
+  private _authChangeSub = new Subject<boolean>();
+  public authChanged = this._authChangeSub.asObservable();
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     configService.getConfig().subscribe((responce) => {
       this.config = responce;
     });
+
+    this._authChangeSub.next(!!window.localStorage.getItem('token'));
   }
 
   configUrl = 'assets/config.json';
@@ -42,15 +36,22 @@ export class AuthApiService {
   externalLogin(loginModel: GoogleAuthDto): Observable<any> {
     console.log(loginModel);
     return this.http
-      .post<any>(`${this.config.baseURL}${this.config.externalLoginUrl}`, loginModel, httpOptions)
+      .post<any>(
+        `${this.config.baseURL}${this.config.externalLoginUrl}`,
+        loginModel,
+        httpOptions
+      )
       .pipe(catchError(this.handleError));
   }
 
-  signOutExternal(): Observable<any> {
-    return this.http
-      .get(this.config.externalSignOutUrl, httpOptions)
-      .pipe(catchError(this.handleError));
+  signOutExternal() {
+    window.localStorage.removeItem('token');
+    this.sendAuthStateChangeNotification(false);
   }
+
+  sendAuthStateChangeNotification = (isAuthenticated: boolean) => {
+    this._authChangeSub.next(isAuthenticated);
+  };
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -28,7 +28,9 @@ namespace StarForum.Infrastructure.Repositories
 
         public async Task<User> AddAsync(User user)
         {
-            return (await _context.Users.AddAsync(user)).Entity;
+            var responce = await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return responce.Entity;
         }
 
         public async Task<User> FindByEmailAsync(string email)

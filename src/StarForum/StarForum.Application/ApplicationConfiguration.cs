@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StarForum.Application.Behaviours;
+using StarForum.Application.Services;
 
 namespace StarForum.Application
 {
@@ -14,6 +15,7 @@ namespace StarForum.Application
 
             services.AddMediatR(currentAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehaviour<,>));
+            services.AddTransient<JwtHandler>();
 
             services.AddFluentValidation(config => config.RegisterValidatorsFromAssembly(currentAssembly));
 
