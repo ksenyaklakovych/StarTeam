@@ -1,9 +1,12 @@
-﻿using Autofac;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StarForum.Domain.Abstract;
-using StarForum.Domain.AutofacModules;
+using StarForum.Domain.AggregatesModel.AnswerAggregate;
+using StarForum.Domain.AggregatesModel.QuestionAggregate;
+using StarForum.Domain.AggregatesModel.UserAggregate;
+using StarForum.Domain.AggregatesModel.UserLoginsAggregate;
+using StarForum.Infrastructure.Repositories;
 
 namespace StarForum.Infrastructure
 {
@@ -15,14 +18,12 @@ namespace StarForum.Infrastructure
             services.AddDbContext<StarForumContext>(opts => opts.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
+            services.AddScoped<IUserLoginRepository, UserLoginRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
             return services;
-        }
-
-        public static ContainerBuilder Register(string connectionString, ContainerBuilder containerBuilder)
-        {
-            containerBuilder.RegisterModule(new ApplicationModule(connectionString));
-
-            return containerBuilder;
         }
     }
 }

@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using StarForum.Application;
 using StarForum.Infrastructure;
-using Autofac;
 using Microsoft.OpenApi.Models;
 
 namespace StarForum.Web
@@ -44,12 +42,6 @@ namespace StarForum.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GS.WebApi", Version = "v1" });
             });
-        }
-
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            var connectionString = Configuration["ConnectionString"];
-            InfrastructureConfiguration.Register(connectionString, builder);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
