@@ -10,4 +10,12 @@ namespace StarForum.Domain.AggregatesModel.QuestionAggregate
         public int AuthorId { get; set; }
         public DateTime CreatedDate { get; set; }
     }
+
+    public class QuestionShortModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string AuthorName { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
 }
