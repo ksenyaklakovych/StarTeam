@@ -28,8 +28,8 @@
         <div class="filter">
             <div class="dropdown">
                 Order by
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Date
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -38,8 +38,13 @@
                 </div>
             </div>
         </div>
-        <div *ngFor="let question of questions">
-            <question-item [question]="question"></question-item>
-        </div>
+        <ng-container *ngIf="!loading && !questions">
+            <p>No questions for now...</p>
+        </ng-container>
+        <ng-container *ngIf="!loading && questions">
+            <div *ngFor="let question of questions">
+                <question-item [question]="question"></question-item>
+            </div>
+        </ng-container>
     </div>
 </div>
