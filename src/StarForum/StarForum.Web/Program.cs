@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Autofac.Extensions.DependencyInjection;
 
 namespace StarForum.Web
 {
@@ -13,7 +12,6 @@ namespace StarForum.Web
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-           .UseServiceProviderFactory(new AutofacServiceProviderFactory())
            .ConfigureWebHostDefaults(
                 webBuilder =>
                 {
