@@ -11,6 +11,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Polly;
+using Polly.Retry;
 
 namespace StarForum.Application.Services
 {
@@ -75,7 +77,16 @@ namespace StarForum.Application.Services
 					Audience = new List<string>() { _googleSettings.GetSection("clientId").Value }
 				};
 
-				var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
+                var retryPolicy = Policy.Handle<Exception>()
+                    .RetryAsync();
+
+                GoogleJsonWebSignature.Payload payload = null;
+
+                await retryPolicy.ExecuteAsync(async () =>
+                {
+                    payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
+                });
+
 				return payload;
 			}
 			catch (Exception ex)
