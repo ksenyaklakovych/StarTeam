@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       await gapi.auth2
         .init({
           client_id:
-            'CLIENT ID HERE',
+            '558382192487-nmb4nc6geo0m2u3ujd26iv9n3ld5etka.apps.googleusercontent.com',
         })
         .then((auth: gapi.auth2.GoogleAuth) => {
           this.gapiSetup = true;
