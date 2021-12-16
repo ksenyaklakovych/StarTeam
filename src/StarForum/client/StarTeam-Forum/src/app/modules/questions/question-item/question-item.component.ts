@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Question } from '../question.service';
+import { Question } from '../questions.service';
 
 @Component({
   selector: 'question-item',
