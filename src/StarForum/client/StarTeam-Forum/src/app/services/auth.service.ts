@@ -5,6 +5,7 @@ import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { GoogleAuthDto } from '../types/authentication/GoogleAuthDto';
 import { ConfigService } from './config.service';
+import {environment} from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,29 +16,19 @@ const httpOptions = {
 
 @Injectable()
 export class AuthApiService {
-  config!: Config;
+
   private _authChangeSub = new Subject<boolean>();
   public authChanged = this._authChangeSub.asObservable();
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
-    configService.getConfig().subscribe((responce) => {
-      this.config = responce;
-    });
-
+  constructor(private http: HttpClient) {
     this._authChangeSub.next(!!window.localStorage.getItem('token'));
-  }
-
-  configUrl = 'assets/config.json';
-
-  getConfig() {
-    return this.http.get<Config>(this.configUrl);
   }
 
   externalLogin(loginModel: GoogleAuthDto): Observable<any> {
     console.log(loginModel);
     return this.http
       .post<any>(
-        `${this.config.baseURL}${this.config.externalLoginUrl}`,
+        `${environment.baseURL}${environment.externalLoginUrl}`,
         loginModel,
         httpOptions
       )

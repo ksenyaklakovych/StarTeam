@@ -1,5 +1,5 @@
 {
-    "baseURL":"https://localhost:44378/",
+    "baseURL":"https://star-forum.azurewebsites.net/",
     "externalLoginUrl": "api/Auth/ExternalLogin",
     "externalSignOutUrl": ""
 }
