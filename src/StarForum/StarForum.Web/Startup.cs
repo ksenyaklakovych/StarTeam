@@ -13,11 +13,11 @@ namespace StarForum.Web
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -28,8 +28,8 @@ namespace StarForum.Web
             services.AddCors();
             services.AddHttpClient();
 
-            services.AddApplicationServices(_configuration)
-                .AddInfrastructureServices(_configuration)
+            services.AddApplicationServices(Configuration)
+                .AddInfrastructureServices(Configuration)
                 .AddRouting();
             services.AddApplicationInsightsTelemetry();
 
@@ -48,7 +48,7 @@ namespace StarForum.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var connectionString = _configuration["ConnectionString"];
+            var connectionString = Configuration["ConnectionString"];
             InfrastructureConfiguration.Register(connectionString, builder);
         }
 

@@ -1,7 +1,12 @@
 {
   "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionString"
+    },
     "appInsights1": {
-      "type": "appInsights"
+      "type": "appInsights",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
     }
   }
 }
