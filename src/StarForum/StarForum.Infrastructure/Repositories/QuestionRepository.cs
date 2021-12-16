@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using StarForum.Application.Models;
 using StarForum.Domain.Abstract;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
 
 namespace StarForum.Infrastructure.Repositories
 {
-    public class QuestionRepository: IQuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
         private readonly StarForumContext _context;
 
@@ -24,9 +26,11 @@ namespace StarForum.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Question Add(Question question)
+        public async Task<Question> AddAsync(Question question)
         {
-            return _context.Questions.Add(question).Entity;
+            var response = await _context.Questions.AddAsync(question);
+            await _context.SaveChangesAsync();
+            return response.Entity;
         }
 
         public async Task<Question> GetAsync(int questionId)
@@ -44,6 +48,21 @@ namespace StarForum.Infrastructure.Repositories
             }
 
             return question;
+        }
+
+        public async Task<IEnumerable<QuestionShortModel>> GetAllAsync()
+        {
+            var questions = await _context
+                .Questions.Join(_context.Users, q => q.AuthorId,
+                    u => u.Id, (q, u) => new QuestionShortModel
+                    {
+                 Title = q.Title,
+                 Description = q.Description,
+                 CreatedDate = q.CreatedDate,
+                 AuthorName = u.Name
+                }).ToListAsync();
+
+            return questions;
         }
 
         public void Update(Question question)
