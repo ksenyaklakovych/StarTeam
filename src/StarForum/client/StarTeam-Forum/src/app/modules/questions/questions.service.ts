@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ConfigService } from 'src/app/services/config.service';
-import { Config } from 'src/app/types/Config';
 
 @Injectable()
 export class QuestionsService {
