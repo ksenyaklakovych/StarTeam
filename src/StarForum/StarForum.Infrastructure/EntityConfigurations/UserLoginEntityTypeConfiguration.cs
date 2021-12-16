@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using StarForum.Domain.AggregatesModel.UserAggregate;
 using StarForum.Domain.AggregatesModel.UserLoginsAggregate;
 
 namespace StarForum.Infrastructure.EntityConfigurations
@@ -20,6 +21,11 @@ namespace StarForum.Infrastructure.EntityConfigurations
             questionConfiguration.Property<string>("LoginProvider");
             questionConfiguration.Property<string>("ProviderKey");
             questionConfiguration.Property<string>("ProviderName");
+
+            questionConfiguration
+                .HasOne<User>(s => s.User)
+                .WithMany(g => g.UserLogins)
+                .HasForeignKey(s => s.UserId);
         }
     }
 }

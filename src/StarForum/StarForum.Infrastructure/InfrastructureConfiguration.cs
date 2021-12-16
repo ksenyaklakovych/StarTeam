@@ -11,7 +11,7 @@ namespace StarForum.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration["ConnectionString"];
+            var connectionString = configuration.GetConnectionString("StarForumDb");
             services.AddDbContext<StarForumContext>(opts => opts.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using StarForum.Domain.Abstract;
 using StarForum.Domain.AggregatesModel.AnswerAggregate;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
+using StarForum.Domain.AggregatesModel.UserAggregate;
+using StarForum.Domain.AggregatesModel.UserLoginsAggregate;
 using StarForum.Infrastructure.EntityConfigurations;
 
 namespace StarForum.Infrastructure
@@ -12,6 +14,8 @@ namespace StarForum.Infrastructure
     {
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserLogin> UserLogins { get; set; }
 
         public StarForumContext(DbContextOptions<StarForumContext> options) : base(options)
         {

@@ -7,16 +7,17 @@ using Microsoft.Extensions.Configuration;
 using StarForum.Application;
 using StarForum.Infrastructure;
 using Autofac;
+using Microsoft.OpenApi.Models;
 
 namespace StarForum.Web
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,15 +28,27 @@ namespace StarForum.Web
             services.AddCors();
             services.AddHttpClient();
 
-            services.AddApplicationServices(_configuration)
-                .AddInfrastructureServices(_configuration)
+            services.AddApplicationServices(Configuration)
+                .AddInfrastructureServices(Configuration)
                 .AddRouting();
             services.AddApplicationInsightsTelemetry();
+
+            services.AddCors(o => o.AddPolicy("Default", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GS.WebApi", Version = "v1" });
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var connectionString = _configuration["ConnectionString"];
+            var connectionString = Configuration["ConnectionString"];
             InfrastructureConfiguration.Register(connectionString, builder);
         }
 
@@ -49,10 +62,15 @@ namespace StarForum.Web
 
             app.UseRouting();
 
+            app.UseCors("Default");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GS.WebApi v1"));
         }
     }
 }
