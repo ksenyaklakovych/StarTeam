@@ -8,6 +8,10 @@
     color: black;
     font-size: 23px;
 
+    &:hover {
+      background-color: #e9ecef8f;
+    }
+
     .google-login-btn {
       width: 25px;
       margin-right: 10px;
