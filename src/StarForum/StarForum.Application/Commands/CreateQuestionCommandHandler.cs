@@ -18,7 +18,7 @@ namespace StarForum.Application.Commands
         {
             var question = new Question() { Title = command.Title, Description = command.Description };
 
-            _questionRepository.Add(question);
+            await _questionRepository.AddAsync(question);
 
             return await _questionRepository.UnitOfWork
                         .SaveEntitiesAsync(cancellationToken);
