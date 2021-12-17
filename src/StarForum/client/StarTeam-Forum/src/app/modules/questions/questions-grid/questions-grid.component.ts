@@ -10,6 +10,7 @@ import { Question, QuestionsService } from '../questions.service';
 })
 export class QuestionsGridComponent {
     questions: Question[] | undefined;
+    loading: boolean = true;
 
     constructor(private router: Router,
         private questionsService: QuestionsService) {
@@ -17,8 +18,10 @@ export class QuestionsGridComponent {
 
     ngOnInit() {
         this.questionsService.getQuestions()
-        .subscribe((data: any) => { 
-            this.questions = data; 
-        });
+            .subscribe((data: any) => {
+                this.questions = data;
+
+                this.loading = false;
+            });
     }
 }
