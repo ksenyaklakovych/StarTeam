@@ -8,7 +8,7 @@ import { Question } from '../questions.service';
 })
 export class QuestionItemComponent implements OnInit {
   @Input()
-  question: Question | undefined;
+  question: Question;
 
   constructor() { 
   }

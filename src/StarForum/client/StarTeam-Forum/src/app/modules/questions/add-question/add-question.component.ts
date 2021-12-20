@@ -28,7 +28,8 @@ export class AddQuestionComponent implements OnInit {
   }
 
   create() {
-    const request = { ...this.questionModel };
+    const tags = this.questionModel.tags.map((t: any) => typeof (t) == 'object' ? t.value : t);
+    const request = { ...this.questionModel, tags: tags };
 
     this.questionService.addQuestion(request).subscribe((result) => {
       this.activeModal.close();

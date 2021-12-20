@@ -57,6 +57,7 @@ namespace StarForum.Infrastructure.Repositories
                     u => u.Id, (q, u) => new QuestionShortModel
                     {
                  Title = q.Title,
+                 Tags = q.Tags != null? q.Tags.Split(',', StringSplitOptions.None) : null,
                  Description = q.Description,
                  CreatedDate = q.CreatedDate,
                  AuthorName = u.Name

@@ -5,6 +5,7 @@
     </div>
     <div class="card-body">
         <p>{{question.description}}</p>
+        <tag-input *ngIf='question.tags' [(ngModel)]='question.tags' [disable]="true" placeholder=""></tag-input>
     </div>
     <div class="card-footer text-muted d-flex justify-content-between">
         <p>

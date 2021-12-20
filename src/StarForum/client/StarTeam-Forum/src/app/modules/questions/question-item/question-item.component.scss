@@ -36,3 +36,10 @@
         }
     }
 }
+
+::ng-deep {
+    .ng2-tag-input {
+        cursor: default;
+        border-bottom: 0px!important;
+    }
+}

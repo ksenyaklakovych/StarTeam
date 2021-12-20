@@ -21,6 +21,7 @@ export class QuestionsService {
 
 export interface Question {
     title: string;
+    tags: string[];
     description: string;
     authorName: string;
     createdDate: Date;

@@ -23,7 +23,8 @@ namespace StarForum.Web.Controllers
         public QuestionsController(IQuestionRepository questionsRepository)
         {
             _questionsRepository = questionsRepository;
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<QuestionShortModel, QuestionModel>());
+            var config = new MapperConfiguration(cfg => 
+                cfg.CreateMap<QuestionShortModel, QuestionModel>());
             _mapper = new Mapper(config);
         }
 
@@ -43,6 +44,7 @@ namespace StarForum.Web.Controllers
             {
                 Title = request.Title,
                 Description = request.Description,
+                Tags = string.Join(',', request.Tags),
                 CreatedDate = DateTime.Now,
                 AuthorId = 1
             };
