@@ -56,12 +56,12 @@ namespace StarForum.Infrastructure.Repositories
                 .Questions.Join(_context.Users, q => q.AuthorId,
                     u => u.Id, (q, u) => new QuestionShortModel
                     {
-                 Title = q.Title,
-                 Tags = q.Tags != null? q.Tags.Split(',', StringSplitOptions.None) : null,
-                 Description = q.Description,
-                 CreatedDate = q.CreatedDate,
-                 AuthorName = u.Name
-                }).ToListAsync();
+                        Title = q.Title,
+                        Tags = q.Tags != null ? q.Tags.Split(',', StringSplitOptions.None) : null,
+                        Description = q.Description,
+                        CreatedDate = q.CreatedDate,
+                        AuthorName = u.Name
+                    }).OrderByDescending(q => q.CreatedDate).ToListAsync();
 
             return questions;
         }
