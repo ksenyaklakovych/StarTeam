@@ -13,6 +13,10 @@ export class QuestionsService {
     getQuestions(): Observable<Question[]> {
         return this.http.get<Question[]>(`${environment.baseURL}${environment.getAllQuestionsUrl}`);
     }
+
+    addQuestion(request: any): Observable<string> {
+        return this.http.post<string>(`${environment.baseURL}${environment.createQuestionUrl}`, request);
+    }
 }
 
 export interface Question {

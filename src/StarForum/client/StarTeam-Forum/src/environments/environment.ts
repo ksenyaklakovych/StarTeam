@@ -7,7 +7,8 @@ export const environment = {
     baseURL:"https://localhost:44378/",
     externalLoginUrl: "api/Auth/ExternalLogin",
     externalSignOutUrl: "",
-    getAllQuestionsUrl: "api/questions/questions"
+    getAllQuestionsUrl: "api/questions/questions",
+    createQuestionUrl: "api/questions/add"
 };
 
 /*

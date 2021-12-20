@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 // import {GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddQuestionComponent } from '../add-question/add-question.component';
 import { Question, QuestionsService } from '../questions.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class QuestionsGridComponent {
     loading: boolean = true;
 
     constructor(private router: Router,
-        private questionsService: QuestionsService) {
+        private questionsService: QuestionsService,
+        private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -23,5 +26,10 @@ export class QuestionsGridComponent {
 
                 this.loading = false;
             });
+    }
+
+    openCreateModal() {
+        const modalRef = this.modalService.open(AddQuestionComponent);
+        modalRef.componentInstance.name = 'World';
     }
 }
