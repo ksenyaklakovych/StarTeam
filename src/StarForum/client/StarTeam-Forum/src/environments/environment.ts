@@ -8,7 +8,10 @@ export const environment = {
     externalLoginUrl: "api/Auth/ExternalLogin",
     externalSignOutUrl: "",
     getAllQuestionsUrl: "api/questions/questions",
-    createQuestionUrl: "api/questions/add"
+    getQuestionByIdUrl: "api/questions/getById",
+    createQuestionUrl: "api/questions/add",
+    getQuestionsByTagUrl: "api/questions/getByTag",
+    filterTagsUrl: "api/tags/filter",
 };
 
 /*

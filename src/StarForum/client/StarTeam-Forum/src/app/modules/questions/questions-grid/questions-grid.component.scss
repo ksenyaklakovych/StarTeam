@@ -33,6 +33,10 @@
                 cursor: pointer;
                 background-color: #e9ecef;
             }
+
+            &.section-selected {
+                background-color: #e9ecef;
+            }
         }
     }
 }
@@ -40,19 +44,4 @@
 .questions-area {
     padding-left: 30px;
     border-left: 1px solid grey;
-
-    h1 {
-        padding-left: 20px;
-        padding-top: 20px;
-    }
-
-    .filter {
-        align-self: flex-end;
-        margin-bottom: 10px;
-
-        button {
-            margin-left: 10px;
-            border-color: #25b7d3;
-        }
-    }
 }

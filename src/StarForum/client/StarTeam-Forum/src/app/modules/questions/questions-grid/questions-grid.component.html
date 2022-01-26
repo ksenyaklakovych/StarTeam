@@ -1,50 +1,31 @@
 <div class="d-flex flex-direction-column">
     <div class="left-tab">
         <div class="button-area d-flex">
-            <button class="btn btn-primary" (click)="openCreateModal()">+ ASK A QUESTION</button>
+            <button class="btn btn-primary" (click)="openCreateModal()" appFontWeightBold [hightlightColor]="'brown'">+
+                ASK A QUESTION</button>
         </div>
         <hr />
         <div class="sections-area">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" routerLink="/questions" routerLinkActive="section-selected"
+            [routerLinkActiveOptions]="{exact: true}">
                 <img src="../../../../assets/icons/question-circle-fill.svg" />
                 Questions
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" routerLink="tags" routerLinkActive="section-selected">
                 <img src="../../../../assets/icons/tags-fill.svg" />
                 Tags
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" routerLink="/favourites" routerLinkActive="section-selected">
                 <img src="../../../../assets/icons/list-stars.svg" />
                 Favourites
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" routerLink="/users" routerLinkActive="section-selected">
                 <img src="../../../../assets/icons/people-fill.svg" />
                 Users
             </div>
         </div>
     </div>
     <div class="d-flex flex-column col-md-7 questions-area">
-        <h1>All Questions</h1>
-        <div class="filter">
-            <div class="dropdown">
-                Order by
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Date
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Title</a>
-                    <a class="dropdown-item" href="#">Date</a>
-                </div>
-            </div>
-        </div>
-        <ng-container *ngIf="!loading && !questions">
-            <p>No questions for now...</p>
-        </ng-container>
-        <ng-container *ngIf="!loading && questions">
-            <div *ngFor="let question of questions">
-                <question-item [question]="question"></question-item>
-            </div>
-        </ng-container>
+        <router-outlet></router-outlet>
     </div>
 </div>

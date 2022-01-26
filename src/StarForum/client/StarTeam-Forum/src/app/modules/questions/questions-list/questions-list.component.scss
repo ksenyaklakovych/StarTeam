@@ -1,0 +1,21 @@
+h1 {
+    padding-top: 20px;
+}
+
+.filter {
+    align-items: baseline;
+    margin-bottom: 10px;
+    justify-content: end;
+
+    ng-select {
+        width: 80px;
+        margin-left: 10px;
+    }
+}
+
+
+::ng-deep {
+    .ng-select-container {
+        border-color: #25b7d3!important;
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using StarForum.Domain.Abstract;
+using StarForum.Application.Models;
 
 namespace StarForum.Domain.AggregatesModel.QuestionAggregate
 {
@@ -12,6 +13,10 @@ namespace StarForum.Domain.AggregatesModel.QuestionAggregate
 
         Task<Question> GetAsync(int questionId);
 
-        Task<IEnumerable<QuestionShortModel>> GetAllAsync();
+        Task<IEnumerable<QuestionShortModel>> GetByTagAsync(string tag);
+
+        Task<IEnumerable<QuestionShortModel>> GetAllAsync(FilterModel filter);
+        
+        Task<List<Tag>> FilterTagsAsync(string filter);
     }
 }

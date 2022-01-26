@@ -1,0 +1,23 @@
+<h1>Tags</h1>
+<p>Find questions by tags.</p>
+<div class="filter">
+    <input 
+    class="form-control" 
+    placeholder="Start typing..."
+    (ngModelChange)="filterChanged($event)"
+    [(ngModel)]="searchPhrase"/>
+</div>
+<div class="tags-area" *ngIf="tags">
+    <ng-container  *ngFor="let t of tags; let i = index">
+        <button class="btn btn-outline-info" routerLink="/questions/tagged/{{t.name}}">
+            {{t.name}}
+            <p>{{t.questionCount}} {{t.questionCount > 1 ? 'questions' : 'question'}}</p>
+        </button>
+    </ng-container>
+</div>
+<div *ngIf="tags && tags.length === 0 && searchPhrase && !loading" class="no-tags">
+    No tags found.
+</div>
+<div *ngIf="loading" class="no-tags">
+    <app-spinner></app-spinner>
+</div>

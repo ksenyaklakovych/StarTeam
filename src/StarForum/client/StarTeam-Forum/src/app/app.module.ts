@@ -8,10 +8,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsModule } from './modules/questions/questions.module';
 import { AuthApiService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
+import { DirectivesModule } from './directives/directives.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    DirectivesModule,
     BrowserModule,
     AppRoutingModule,
     AuthorizationModule,

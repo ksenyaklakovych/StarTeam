@@ -1,23 +1,25 @@
 <div class="modal-header">
     <h4 class="modal-title" ngbAutofocus>Create a question</h4>
 </div>
-<div class="modal-body">
-    <form [formGroup]="questionForm">
-        <div class="input-field">
-            <label>Summary *</label>
-            <input class="form-control" [(ngModel)]="questionModel.title" formControlName="title">
-        </div>
-        <div class="input-field">
-            <label>Description *</label>
-            <textarea class="form-control" maxlength="2000" [(ngModel)]="questionModel.description" formControlName="description"></textarea>
-        </div>
-        <div class="input-field">
-            <label>Tags</label>
-            <tag-input [(ngModel)]='questionModel.tags' placeholder="Add a tag and press Enter" [maxItems]="10" formControlName="tags">
-            </tag-input>
-        </div>
-    </form>
-</div>
+<app-spinner-content [showSpinner]="loading">
+    <div class="modal-body">
+        <form [formGroup]="questionForm">
+            <div class="input-field">
+                <label>Summary *</label>
+                <input class="form-control" [(ngModel)]="questionModel.title" formControlName="title">
+            </div>
+            <div class="input-field">
+                <label>Description *</label>
+                <textarea class="form-control" maxlength="2000" [(ngModel)]="questionModel.description" formControlName="description"></textarea>
+            </div>
+            <div class="input-field">
+                <label>Tags</label>
+                <tag-input [(ngModel)]='questionModel.tags' placeholder="Add a tag and press Enter" [maxItems]="10" formControlName="tags">
+                </tag-input>
+            </div>
+        </form>
+    </div>
+</app-spinner-content>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
     <button type="button" class="btn btn-primary" (click)="create()" [disabled]="questionForm.invalid">Create</button>

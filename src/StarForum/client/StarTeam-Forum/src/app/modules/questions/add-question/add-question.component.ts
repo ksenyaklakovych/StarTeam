@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsService } from '../questions.service';
 
@@ -9,8 +10,11 @@ import { QuestionsService } from '../questions.service';
   styleUrls: ['./add-question.component.scss']
 })
 export class AddQuestionComponent implements OnInit {
+  loading: boolean;
 
-  constructor(public activeModal: NgbActiveModal, private questionService: QuestionsService) { }
+  constructor(public activeModal: NgbActiveModal, 
+    private questionService: QuestionsService,
+    private router: Router) { }
 
   questionModel: QuestionRequestModel = {
     title: null,
@@ -28,13 +32,14 @@ export class AddQuestionComponent implements OnInit {
   }
 
   create() {
+    this.loading = true;
     const tags = this.questionModel.tags.map((t: any) => typeof (t) == 'object' ? t.value : t);
     const request = { ...this.questionModel, tags: tags };
 
-    this.questionService.addQuestion(request).subscribe((result) => {
+    this.questionService.addQuestion(request).subscribe((result: any) => {
+      this.loading = false;
+      this.router.navigate([`/questions/${result.id}`]);
       this.activeModal.close();
-
-      // todo: navigate to question
     });
   }
 

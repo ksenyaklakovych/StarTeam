@@ -1,6 +1,6 @@
 <div class="card" *ngIf="question">
     <div class="card-header d-flex justify-content-between">
-        <a href=""><p class="bold title">{{question.title}}</p></a>
+        <a routerLink="{{question.id}}" routerLinkActive="active"><p class="bold title">{{question.title}}</p></a>
         <p>{{question.createdDate | date: 'fullDate'}}</p>
     </div>
     <div class="card-body">
