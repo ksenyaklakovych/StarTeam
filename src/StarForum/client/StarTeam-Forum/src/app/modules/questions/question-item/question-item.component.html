@@ -1,7 +1,13 @@
 <div class="card" *ngIf="question">
     <div class="card-header d-flex justify-content-between">
-        <a routerLink="{{question.id}}" routerLinkActive="active"><p class="bold title">{{question.title}}</p></a>
-        <p>{{question.createdDate | date: 'fullDate'}}</p>
+        <a routerLink="/questions/{{question.id}}" routerLinkActive="active"><p class="bold title">{{question.title}}</p></a>
+        <div class="d-flex justify-content-between favourite">
+            <p>{{question.createdDate | date: 'fullDate'}}</p>
+            <span (click)="favouriteClicked()">
+                <i *ngIf="!isFavourite" class="bi bi-star"></i>
+                <i *ngIf="isFavourite" class="bi bi-star-fill"></i>
+            </span>
+        </div>
     </div>
     <div class="card-body">
         <p>{{question.description}}</p>

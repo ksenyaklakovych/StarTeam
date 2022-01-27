@@ -19,7 +19,6 @@ export class TagPageComponent implements OnInit {
 
       this.questionsService.getQuestionsByTagName(this.tagName).subscribe((result) => {
         this.questions = result;
-        debugger
       })
     });
   }

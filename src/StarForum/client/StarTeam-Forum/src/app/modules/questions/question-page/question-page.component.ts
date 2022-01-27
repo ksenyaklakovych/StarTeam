@@ -19,7 +19,7 @@ export class QuestionPageComponent implements OnInit {
 
       this.questionsService.getQuestionById(id).subscribe((result) => {
         this.question = result;
-      })
+      });
     })
   }
 

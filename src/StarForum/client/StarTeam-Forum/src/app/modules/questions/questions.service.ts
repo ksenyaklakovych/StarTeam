@@ -33,6 +33,14 @@ export class QuestionsService {
     addQuestion(request: any): Observable<string> {
         return this.http.post<string>(`${environment.baseURL}${environment.createQuestionUrl}`, request);
     }
+
+    isQuestionFavourite(id: number): Observable<boolean> {
+        return this.http.get<boolean>(`${environment.baseURL}${environment.isQuestionFavouriteUrl}/${id}`);
+    }
+
+    changeIsFavourite(newValue: boolean, id: number): Observable<void> {
+        return this.http.get<void>(`${environment.baseURL}${environment.changeIsFavouriteUrl}/${id}/${newValue}`);
+    }
 }
 
 export interface Question {

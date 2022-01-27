@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarForum.Infrastructure;
 
 namespace StarForum.Infrastructure.Migrations
 {
     [DbContext(typeof(StarForumContext))]
-    partial class StarForumContextModelSnapshot : ModelSnapshot
+    [Migration("20220127095236_add favourites table")]
+    partial class addfavouritestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,28 +63,6 @@ namespace StarForum.Infrastructure.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Answers");
-                });
-
-            modelBuilder.Entity("StarForum.Domain.AggregatesModel.FavouriteAggregate.Favourite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Favourites");
                 });
 
             modelBuilder.Entity("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", b =>
@@ -184,21 +164,6 @@ namespace StarForum.Infrastructure.Migrations
                     b.HasOne("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", null)
                         .WithMany()
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StarForum.Domain.AggregatesModel.FavouriteAggregate.Favourite", b =>
-                {
-                    b.HasOne("StarForum.Domain.AggregatesModel.QuestionAggregate.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("StarForum.Domain.AggregatesModel.UserAggregate.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

@@ -41,11 +41,25 @@ namespace StarForum.Web.Controllers
         public async Task<IActionResult> GetQuestionById([FromUri] int id)
         {
             Question questionResult = await _questionsRepository.GetAsync(id);
-            //_mapper.Map<QuestionModel>(questionResult);
 
             return Ok(questionResult);
         }
 
+        [HttpGet("isFavourite/{id}")]
+        public async Task<IActionResult> IsQuestionFavourite([FromUri] int id)
+        {
+            bool result = await _questionsRepository.CheckFavourite(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet("changeIsFavourite/{questionId}/{value}")]
+        public async Task<IActionResult> IsQuestionFavourite([FromUri] int questionId, [FromUri] bool value)
+        {
+            bool result = await _questionsRepository.UpdateFavourite(questionId, value);
+
+            return Ok(true);
+        }
 
         [HttpGet("getByTag/{tag}")]
         public async Task<IActionResult> GetQuestionsByTag([FromUri] string tag)

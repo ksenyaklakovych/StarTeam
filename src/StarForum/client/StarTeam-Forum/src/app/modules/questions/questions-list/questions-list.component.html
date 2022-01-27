@@ -5,16 +5,4 @@
         [(ngModel)]="orderByOption" (change)="onSortingChange($event)">
     </ng-select>
 </div>
-<ng-container *ngIf="questions; else noQuestions">
-    <div *ngFor="let question of questions">
-        <question-item [question]="question"></question-item>
-    </div>
-</ng-container>
-<ng-template #noQuestions>
-    <ng-container *ngIf="loading">
-        <app-spinner></app-spinner>
-    </ng-container>
-    <ng-container *ngIf="!loading">
-        <p>No questions for now...</p>
-    </ng-container>
-</ng-template>
+<app-questions [questions]="questions"></app-questions>

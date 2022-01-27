@@ -19,6 +19,23 @@
             font-weight: 600;
             color: #707070;
         }
+
+        .favourite {
+            align-items: baseline;
+
+            span:hover {
+                cursor: pointer;
+            }
+
+            i {
+                margin-left: 10px;
+                font-size: 20px;
+
+                &:hover {
+                    color: blue;
+                }
+            }
+        }
     }
 
     .card-footer {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StarForum.Application.Models;
 using StarForum.Domain.Abstract;
+using StarForum.Domain.AggregatesModel.FavouriteAggregate;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
 
 namespace StarForum.Infrastructure.Repositories
@@ -129,6 +130,30 @@ namespace StarForum.Infrastructure.Repositories
             var result = questions.Where(q => q.Tags.Count() >= 1 && q.Tags.Contains(tag));
 
             return result;
+        }
+
+        public async Task<bool> CheckFavourite(int questionId)
+        {
+            var result = await _context.Favourites.FirstOrDefaultAsync(f => f.QuestionId == questionId && f.UserId == 1);
+            
+            return result != null;
+        }
+
+        public async Task<bool> UpdateFavourite(int questionId, bool addToFavourites)
+        {
+            if (addToFavourites)
+            {
+                Favourite favourite = new Favourite() { QuestionId = questionId, UserId = 1 };
+                await _context.Favourites.AddAsync(favourite);
+            }
+            else
+            {
+                Favourite favourite = await _context.Favourites.FirstOrDefaultAsync(f => f.UserId == 1 && f.QuestionId == questionId);
+                _context.Favourites.Remove(favourite);
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

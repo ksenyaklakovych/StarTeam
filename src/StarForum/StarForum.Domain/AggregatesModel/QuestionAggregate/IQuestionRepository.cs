@@ -18,5 +18,9 @@ namespace StarForum.Domain.AggregatesModel.QuestionAggregate
         Task<IEnumerable<QuestionShortModel>> GetAllAsync(FilterModel filter);
         
         Task<List<Tag>> FilterTagsAsync(string filter);
+
+        Task<bool> CheckFavourite(int questionId);
+
+        Task<bool> UpdateFavourite(int questionId, bool favourite);
     }
 }

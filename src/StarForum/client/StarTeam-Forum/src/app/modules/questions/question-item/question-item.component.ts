@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Question } from '../questions.service';
+import { Question, QuestionsService } from '../questions.service';
 
 @Component({
   selector: 'question-item',
@@ -10,10 +10,20 @@ export class QuestionItemComponent implements OnInit {
   @Input()
   question: Question;
 
-  constructor() { 
+  isFavourite: boolean;
+
+  constructor(private questionsService: QuestionsService) { 
   }
 
   ngOnInit(): void {
+    this.questionsService.isQuestionFavourite(this.question.id).subscribe((result) => {
+      this.isFavourite = result;
+    });
   }
 
+  favouriteClicked() {
+    this.questionsService.changeIsFavourite(!this.isFavourite, this.question.id).subscribe((result) => {
+      this.isFavourite = !this.isFavourite;
+    });
+  }
 }

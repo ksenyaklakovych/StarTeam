@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StarForum.Domain.Abstract;
 using StarForum.Domain.AggregatesModel.AnswerAggregate;
+using StarForum.Domain.AggregatesModel.FavouriteAggregate;
 using StarForum.Domain.AggregatesModel.QuestionAggregate;
 using StarForum.Domain.AggregatesModel.UserAggregate;
 using StarForum.Domain.AggregatesModel.UserLoginsAggregate;
@@ -16,6 +17,7 @@ namespace StarForum.Infrastructure
         public DbSet<Answer> Answers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserLogin> UserLogins { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
 
         public StarForumContext(DbContextOptions<StarForumContext> options) : base(options)
         {

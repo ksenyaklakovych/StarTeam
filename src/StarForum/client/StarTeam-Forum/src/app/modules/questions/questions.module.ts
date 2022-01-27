@@ -15,6 +15,8 @@ import { QuestionPageComponent } from './question-page/question-page.component';
 import { TagsComponent } from './tags/tags.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TagPageComponent } from './tag-page/tag-page.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TagPageComponent } from './tag-page/tag-page.component';
     AddQuestionComponent,
     QuestionPageComponent,
     TagsComponent,
-    TagPageComponent
+    TagPageComponent,
+    QuestionsComponent,
+    FavouritesComponent
   ],
   imports: [
     NgSelectModule,
