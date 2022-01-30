@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class QuestionsService {
     apiUrl: string = "api/questions";
+
+    favouriteChanged = new Subject<boolean>();
 
     constructor(private http: HttpClient) {
     }
@@ -24,6 +26,10 @@ export class QuestionsService {
         {
             params: params,
         });
+    }
+
+    getFavourites(): Observable<Question[]> {
+        return this.http.get<Question[]>(`${environment.baseURL}${environment.getFavouritesUrl}`);
     }
 
     filterTags(filter: string): Observable<Tag[]> {

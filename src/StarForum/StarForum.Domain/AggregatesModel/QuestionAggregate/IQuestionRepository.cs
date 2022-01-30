@@ -16,6 +16,8 @@ namespace StarForum.Domain.AggregatesModel.QuestionAggregate
         Task<IEnumerable<QuestionShortModel>> GetByTagAsync(string tag);
 
         Task<IEnumerable<QuestionShortModel>> GetAllAsync(FilterModel filter);
+
+        Task<IEnumerable<QuestionShortModel>> GetFavouritesAsync(int userId);
         
         Task<List<Tag>> FilterTagsAsync(string filter);
 

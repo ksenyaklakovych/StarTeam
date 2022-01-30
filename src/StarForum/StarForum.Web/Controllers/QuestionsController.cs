@@ -37,6 +37,16 @@ namespace StarForum.Web.Controllers
             return Ok(questionsResult);
         }
 
+        [HttpGet("favourites")]
+        public async Task<IActionResult> GetFavourites()
+        {
+            int userId = 1;
+            IEnumerable<QuestionShortModel> questionsResult = await _questionsRepository.GetFavouritesAsync(userId);
+            _mapper.Map<IEnumerable<QuestionModel>>(questionsResult);
+
+            return Ok(questionsResult);
+        }
+
         [HttpGet("getById/{id}")]
         public async Task<IActionResult> GetQuestionById([FromUri] int id)
         {
@@ -54,7 +64,7 @@ namespace StarForum.Web.Controllers
         }
 
         [HttpGet("changeIsFavourite/{questionId}/{value}")]
-        public async Task<IActionResult> IsQuestionFavourite([FromUri] int questionId, [FromUri] bool value)
+        public async Task<IActionResult> ChangeFavourite([FromUri] int questionId, [FromUri] bool value)
         {
             bool result = await _questionsRepository.UpdateFavourite(questionId, value);
 

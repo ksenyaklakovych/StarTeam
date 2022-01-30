@@ -155,5 +155,28 @@ namespace StarForum.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<QuestionShortModel>> GetFavouritesAsync(int userId)
+        {
+            var questionsQuery = _context
+                          .Favourites.Join(_context.Users, q => q.UserId,
+                              u => u.Id, (q, u) => new
+                              {
+                                  QuestionId = q.QuestionId,
+                                  AuthorName = u.Name
+                              }).Join(_context.Questions, f => f.QuestionId, q=>q.Id, (f,q) => new QuestionShortModel
+                              {
+                                  Id = q.Id,
+                                  Title = q.Title,
+                                  Tags = q.Tags != null ? q.Tags.Split(',', StringSplitOptions.None) : new string[] { },
+                                  Description = q.Description,
+                                  CreatedDate = q.CreatedDate,
+                                  AuthorName = f.AuthorName
+                              });
+
+            var result = await questionsQuery.ToListAsync();
+
+            return result;
+        }
     }
 }

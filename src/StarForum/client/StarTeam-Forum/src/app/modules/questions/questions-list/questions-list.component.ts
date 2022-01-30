@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IQuestionRequest, Question, QuestionsService } from '../questions.service';
 
 @Component({
@@ -16,9 +17,15 @@ export class QuestionsListComponent implements OnInit {
   @Output()
   sortChanged: EventEmitter<string> = new EventEmitter();
 
-  constructor(private questionsService: QuestionsService) { }
+  constructor(private questionsService: QuestionsService, private route: ActivatedRoute) {
+   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      //const id = +params['id'];
+
+      
+    })
     this.queryQuestions();
   }
 

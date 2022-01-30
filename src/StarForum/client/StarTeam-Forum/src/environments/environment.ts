@@ -13,7 +13,8 @@ export const environment = {
     getQuestionsByTagUrl: "api/questions/getByTag",
     filterTagsUrl: "api/tags/filter",
     isQuestionFavouriteUrl: "api/questions/isFavourite",
-    changeIsFavouriteUrl: "api/questions/changeIsFavourite"
+    changeIsFavouriteUrl: "api/questions/changeIsFavourite",
+    getFavouritesUrl: "api/questions/favourites"
 };
 
 /*
