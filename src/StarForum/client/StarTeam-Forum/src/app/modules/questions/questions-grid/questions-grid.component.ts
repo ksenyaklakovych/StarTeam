@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddQuestionComponent } from '../add-question/add-question.component';
+import { QuestionsService } from '../questions.service';
 
 @Component({
     selector: 'questions-grid',
@@ -9,14 +9,13 @@ import { AddQuestionComponent } from '../add-question/add-question.component';
     styleUrls: ['./questions-grid.component.scss']
 })
 export class QuestionsGridComponent {
-    constructor(private modalService: NgbModal, private router: Router) {
-        if(this.router.url == '/questions/create') 
-        {
-          this.openCreateModal();
-        }
+    constructor(private modalService: NgbModal, private questionService: QuestionsService) {
     }
 
     ngOnInit() {
+        this.questionService.openCreateModal$.subscribe(() => {
+            this.openCreateModal();
+        });
     }
 
     openCreateModal() {

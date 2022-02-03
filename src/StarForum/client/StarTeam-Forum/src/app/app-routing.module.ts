@@ -14,14 +14,14 @@ const routes: Routes = [
     path: 'questions', component: QuestionsGridComponent, children: [
       { path: '', component: QuestionsListComponent },
       { path: 'tags', component: TagsComponent },
-      { path: 'create', component: QuestionsGridComponent },
+      { path: 'create', component: QuestionsListComponent },
       { path: 'favourites', component: FavouritesComponent },
       { path: ':id', component: QuestionPageComponent },
       { path: 'tagged', children: [
         { path: ':name', component: TagPageComponent }
       ]}
     ]
-  },
+  }
 ];
 
 @NgModule({

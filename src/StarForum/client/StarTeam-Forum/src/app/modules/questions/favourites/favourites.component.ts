@@ -13,7 +13,7 @@ export class FavouritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadQuestions();
-    this.questionsService.favouriteChanged.subscribe(() => {
+    this.questionsService.favouriteChanged$.subscribe(() => {
       this.loadQuestions();
     });
   }

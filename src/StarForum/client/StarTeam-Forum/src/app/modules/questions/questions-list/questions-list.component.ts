@@ -17,15 +17,14 @@ export class QuestionsListComponent implements OnInit {
   @Output()
   sortChanged: EventEmitter<string> = new EventEmitter();
 
-  constructor(private questionsService: QuestionsService, private route: ActivatedRoute) {
+  constructor(private questionsService: QuestionsService, private route: Router) {
    }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      //const id = +params['id'];
+    if (this.route.url == '/questions/create') {
+      this.questionsService.openCreateModal$.next();
+    }
 
-      
-    })
     this.queryQuestions();
   }
 

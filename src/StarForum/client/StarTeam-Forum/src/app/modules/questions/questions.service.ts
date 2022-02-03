@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
 export class QuestionsService {
     apiUrl: string = "api/questions";
 
-    favouriteChanged = new Subject<boolean>();
+    favouriteChanged$ = new Subject<boolean>();
+    openCreateModal$ = new Subject<void>();
 
     constructor(private http: HttpClient) {
     }

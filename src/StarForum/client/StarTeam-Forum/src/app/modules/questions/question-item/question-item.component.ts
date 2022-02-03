@@ -25,7 +25,7 @@ export class QuestionItemComponent implements OnInit {
     this.questionsService.changeIsFavourite(!this.isFavourite, this.question.id).subscribe((result) => {
       this.isFavourite = !this.isFavourite;
 
-      this.questionsService.favouriteChanged.next(this.isFavourite);
+      this.questionsService.favouriteChanged$.next(this.isFavourite);
     });
   }
 }
