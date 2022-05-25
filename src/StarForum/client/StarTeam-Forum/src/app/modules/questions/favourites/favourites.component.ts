@@ -7,7 +7,7 @@ import { Question, QuestionsService } from '../questions.service';
   styleUrls: ['./favourites.component.scss']
 })
 export class FavouritesComponent implements OnInit {
-  questions: Question[];
+  questions: Question[] = [];
   
   constructor(private questionsService: QuestionsService) { }
 
